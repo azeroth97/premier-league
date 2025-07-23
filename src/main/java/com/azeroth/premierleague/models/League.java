@@ -1,25 +1,26 @@
 package com.azeroth.premierleague.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "teams")
-public class Team {
+@Table(name = "leagues")
+public class League {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private String stadium;
+  private String country;
 
-  @ManyToOne
-  @JoinColumn(name = "league_id", referencedColumnName = "id")
-  private League league;
+  @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
+  private List<Team> teams;
 
   public Long getId() {
     return id;
@@ -37,20 +38,19 @@ public class Team {
     this.name = name;
   }
 
-  public String getStadium() {
-    return stadium;
+  public String getCountry() {
+    return country;
   }
   
-  public void setStadium(String stadium) {
-    this.stadium = stadium;
+  public void setCountry(String country) {
+    this.country = country;
   }
 
-  public League getLeague() {
-    return league;
+  public List<Team> getTeams() {
+    return teams;
   }
 
-  public void setLeague(League league) {
-    this.league = league;
+  public void setTeams(List<Team> teams) {
+    this.teams = teams;
   }
-
 }

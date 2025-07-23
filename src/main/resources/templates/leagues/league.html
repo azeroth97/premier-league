@@ -1,12 +1,12 @@
 <html>
 <head>
-  <title>Premier League</title>
+  <title th:text = "${league.name}"></title>
   <style>
     table {
       border-collapse: collapse;
     }
     td {
-      width: 100px;
+      width: 120px;
       padding: 5px;
       padding-left: 10px;
       border: 1px solid black;
@@ -16,7 +16,7 @@
 </head> 
 <body>
   <br/>
-  <h4>Premier League</h4>
+  <h4 th:text = "${league.name}"></h4>
   <table border = "1">
     <tr>
       <th>Team</th>
@@ -24,7 +24,7 @@
       <th>Est.</th>
     </tr>
 
-    <tr th:each = "team: ${teams}">
+    <tr th:each = "team: ${league.getTeams}">
       <td th:text = "*{team.name}"></td>
       <td th:text = "*{team.stadium}"></td>
       <td>2025</td>
